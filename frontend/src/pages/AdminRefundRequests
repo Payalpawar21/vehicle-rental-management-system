@@ -1,0 +1,136 @@
+```javascript
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+
+function AdminRefundRequests() {
+
+  const [requests, setRequests] = useState([]);
+
+  const admin = JSON.parse(localStorage.getItem("user"));
+
+  useEffect(() => {
+    fetchRequests();
+  }, []);
+
+  const fetchRequests = async () => {
+
+    try {
+
+      const { data } = await axios.get(
+        "http://localhost:5000/api/payments/refund-requests",
+        {
+          headers: {
+            Authorization: `Bearer ${admin.token}`
+          }
+        }
+      );
+
+      setRequests(data);
+
+    } catch (error) {
+
+      console.log(error);
+
+    }
+
+  };
+
+  const processRefund = async (bookingId) => {
+
+    if (!window.confirm("Process refund for this booking?")) {
+      return;
+    }
+
+    try {
+
+      await axios.post(
+        `http://localhost:5000/api/payments/refund/${bookingId}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${admin.token}`
+          }
+        }
+      );
+
+      alert("Refund processed");
+      fetchRequests();
+
+    } catch (error) {
+
+      alert("Refund failed");
+
+    }
+
+  };
+
+  return (
+    <div className="container mt-5">
+
+      <h2 className="fw-bold mb-4">💰 Refund Requests</h2>
+
+      <table className="table table-bordered">
+
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Vehicle</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+{requests.length === 0 ? (
+
+<tr>
+<td colSpan="5" className="text-center">
+No refund requests found
+</td>
+</tr>
+
+) : (
+
+requests.map((r) => (
+
+<tr key={r._id}>
+
+<td>{r.user?.name}</td>
+<td>{r.vehicle?.name}</td>
+<td>₹ {r.totalAmount}</td>
+
+<td>
+<span className="badge bg-warning">
+Refund Requested
+</span>
+</td>
+
+<td>
+
+<button
+className="btn btn-danger btn-sm"
+onClick={() => processRefund(r._id)}
+>
+Process Refund
+</button>
+
+</td>
+
+</tr>
+
+))
+
+)}
+
+</tbody>
+      </table>
+
+    </div>
+  );
+
+}
+
+export default AdminRefundRequests;
+
