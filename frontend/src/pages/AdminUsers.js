@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import API from "../api";
 
 function AdminUsers() {
 
@@ -17,7 +17,7 @@ function AdminUsers() {
 
       const user = JSON.parse(localStorage.getItem("user"));
 
-      const { data } = await axios.get(
+      const { data } = await API.get(
         "http://localhost:5000/api/admin/users",
         {
           headers: {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import API from "../api";
 import { Link, useNavigate } from "react-router-dom";
 import "./AdminVehicles.css";
 
@@ -15,7 +15,8 @@ function AdminVehicles() {
 
   const fetchVehicles = async () => {
     try {
-      const { data } = await axios.get(
+
+      const { data } = await API.get(
         "http://localhost:5000/api/vehicles"
       );
 
@@ -34,7 +35,7 @@ function AdminVehicles() {
 
       const user = JSON.parse(localStorage.getItem("user"));
 
-      await axios.delete(
+      await API.delete(
         `http://localhost:5000/api/admin/vehicles/${id}`,
         {
           headers: {
@@ -48,8 +49,10 @@ function AdminVehicles() {
       fetchVehicles();
 
     } catch (error) {
+
       console.log(error);
       alert("Error deleting vehicle");
+
     }
   };
 
@@ -58,22 +61,21 @@ function AdminVehicles() {
   );
 
   return (
+
     <div className="container mt-4">
 
+      {/* Top Header */}
       <div className="d-flex justify-content-between align-items-center mb-4">
 
         <h2 className="fw-bold">🚗 Manage Vehicles</h2>
 
         <Link to="/admin/addvehicle">
-          <button className="btn btn-primary">
+          <button className="btn btn-primary fw-bold">
             + Add Vehicle
           </button>
         </Link>
 
       </div>
-
-
-      
 
       {/* Search */}
       <input
@@ -84,57 +86,57 @@ function AdminVehicles() {
         onChange={(e) => setSearch(e.target.value)}
       />
 
+      {/* Vehicle Cards */}
       <div className="row">
 
         {filteredVehicles.map((vehicle) => (
 
           <div key={vehicle._id} className="col-md-4 mb-4">
 
-            <div className="card shadow-sm h-100">
+            <div className="card vehicle-card shadow">
 
+              {/* Vehicle Image */}
               <img
                 src={`http://localhost:5000/images/${vehicle.image}`}
                 alt={vehicle.name}
-                className="card-img-top"
-                style={{
-                  height: "200px",
-                  objectFit: "cover",
-                }}
+                className="card-img-top vehicle-img"
               />
 
-              <div className="card-body">
+              {/* Vehicle Details */}
+              <div className="card-body d-flex flex-column">
 
-                <h5 className="card-title fw-bold">
+                <h5 className="fw-bold">
                   {vehicle.name}
                 </h5>
 
-                <p className="text-muted">
+                <p className="text-muted mb-2">
                   {vehicle.type} • {vehicle.seats} Seats
                 </p>
 
-                <h6 className="text-success">
+                <h6 className="text-success fw-bold mb-3">
                   ₹{vehicle.pricePerDay} / day
                 </h6>
 
-              </div>
+                {/* Buttons */}
+                <div className="mt-auto d-flex gap-2">
 
-              <div className="card-footer d-flex justify-content-between">
+                  <button
+                    className="btn btn-warning w-50 fw-bold"
+                    onClick={() =>
+                      navigate(`/admin/editvehicle/${vehicle._id}`)
+                    }
+                  >
+                    ✏ Edit
+                  </button>
 
-                <button
-                  className="btn btn-warning btn-sm"
-                  onClick={() =>
-                    navigate(`/admin/editvehicle/${vehicle._id}`)
-                  }
-                >
-                  Edit
-                </button>
+                  <button
+                    className="btn btn-danger w-50 fw-bold"
+                    onClick={() => deleteVehicle(vehicle._id)}
+                  >
+                    🗑 Delete
+                  </button>
 
-                <button
-                  className="btn btn-danger btn-sm"
-                  onClick={() => deleteVehicle(vehicle._id)}
-                >
-                  Delete
-                </button>
+                </div>
 
               </div>
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import API from "../api";
 import { useParams, useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -29,7 +29,7 @@ const fetchVehicle = async () => {
 try {
 
 
-  const { data } = await axios.get(
+  const { data } = await API.get(
     `http://localhost:5000/api/vehicles/${id}`
   );
 
@@ -85,7 +85,7 @@ if (!startDate || !endDate) {
 
 try {
 
-  await axios.post(
+  await API.post(
     "http://localhost:5000/api/bookings",
     {
       vehicle: vehicle._id,
@@ -133,7 +133,7 @@ if (!rating) {
 
 try {
 
-  await axios.post(
+  await API.post(
     "http://localhost:5000/api/ratings/add",
     {
       vehicleId: vehicle._id,

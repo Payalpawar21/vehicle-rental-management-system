@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import API from "../api";
 
 function AdminPayments() {
 
@@ -17,7 +17,7 @@ try {
 
   const user = JSON.parse(localStorage.getItem("user"));
 
-  const { data } = await axios.get(
+  const { data } = await API.get(
     "http://localhost:5000/api/admin/payments",
     {
       headers: {
@@ -47,7 +47,7 @@ try {
 
   const user = JSON.parse(localStorage.getItem("user"));
 
-  await axios.post(
+  await API.post(
     `http://localhost:5000/api/payments/refund/${bookingId}`,
     {},
     {

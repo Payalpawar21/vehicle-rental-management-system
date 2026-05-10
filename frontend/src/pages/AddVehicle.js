@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import API from "../api";
 import { useNavigate } from "react-router-dom";
 
 function AddVehicle() {
@@ -47,7 +47,7 @@ function AddVehicle() {
       formData.append("pricePerMonth", vehicle.pricePerMonth);
       formData.append("image", image);
 
-      await axios.post(
+      await API.post(
         "http://localhost:5000/api/vehicles",
         formData,
         {

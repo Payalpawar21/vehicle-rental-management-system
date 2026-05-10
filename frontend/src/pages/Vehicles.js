@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import API from "../api";
 import { useNavigate } from "react-router-dom";
 import "./Vehicles.css";
 
@@ -23,7 +23,7 @@ function Vehicles() {
 
   const fetchVehicles = async () => {
     try {
-      const { data } = await axios.get("http://localhost:5000/api/vehicles");
+      const { data } = await API.get("http://localhost:5000/api/vehicles");
       setVehicles(data);
       setLoading(false);
     } catch (error) {
@@ -226,6 +226,64 @@ onClick={() => toggleMore(vehicle._id)}
 </div>
 
 )}
+
+{/* Admin Buttons */}
+
+{user && user.isAdmin && (
+
+  <div className="d-flex gap-2 mb-3">
+
+    <button
+      className="btn btn-warning w-50"
+      onClick={() => navigate(`/admin/edit-vehicle/${vehicle._id}`)}
+    >
+      Edit
+    </button>
+
+    <button
+      className="btn btn-danger w-50"
+      onClick={async () => {
+
+        const confirmDelete = window.confirm(
+          "Are you sure you want to delete this vehicle?"
+        );
+
+        if (confirmDelete) {
+          try {
+
+            const token = localStorage.getItem("token");
+
+await API.delete(
+  `http://localhost:5000/api/vehicles/${vehicle._id}`,
+  {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+);
+            alert("Vehicle Deleted Successfully");
+
+            fetchVehicles();
+
+          } catch (error) {
+
+            console.log(error);
+            alert("Delete Failed");
+
+          }
+        }
+      }}
+    >
+      Delete
+    </button>
+
+  </div>
+
+)}
+
+
+
+
 
 {user && !user.isAdmin && (
 

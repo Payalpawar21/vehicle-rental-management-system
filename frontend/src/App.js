@@ -121,7 +121,7 @@ function App() {
         />
 
         <Route
-          path="/admin/editvehicle/:id"
+          path="/admin/edit-vehicle/:id"
           element={
             <AdminRoute>
               <EditVehicle />

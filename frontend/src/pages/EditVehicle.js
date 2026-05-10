@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { getToken } from "../utils/auth";
-import { toast } from "react-toastify";
+import API from "../api";
 import { useNavigate, useParams } from "react-router-dom";
 
 function EditVehicle() {
+
   const { id } = useParams();
+
   const navigate = useNavigate();
 
   const [vehicle, setVehicle] = useState({
     name: "",
     brand: "",
+    model: "",
+    vehicleNumber: "",
     type: "",
-    fuelType: "",
-    rentPerDay: "",
-    image: "",
+    seats: "",
+    pricePerDay: ""
   });
 
   useEffect(() => {
@@ -22,93 +23,154 @@ function EditVehicle() {
   }, []);
 
   const fetchVehicle = async () => {
-    const res = await axios.get("http://localhost:5000/api/vehicles");
-    const found = res.data.find((v) => v._id === id);
-    setVehicle(found);
+
+    try {
+
+      const token = localStorage.getItem("token");
+
+      const { data } = await API.get(
+        `http://localhost:5000/api/vehicles/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      setVehicle(data);
+
+    } catch (error) {
+
+      console.log(error);
+
+      alert("Vehicle Fetch Failed");
+
+    }
   };
 
   const handleChange = (e) => {
-    setVehicle({ ...vehicle, [e.target.name]: e.target.value });
+
+    setVehicle({
+      ...vehicle,
+      [e.target.name]: e.target.value,
+    });
+
   };
 
-  const updateVehicle = async (e) => {
+  const handleSubmit = async (e) => {
+
     e.preventDefault();
 
     try {
-      await axios.put(`http://localhost:5000/api/vehicles/${id}`, vehicle, {
-        headers: {
-          Authorization: `Bearer ${getToken()}`,
-        },
-      });
 
-      toast.success("Vehicle Updated Successfully");
-      navigate("/admin/vehicles");
+      const token = localStorage.getItem("token");
+
+      await API.put(
+        `http://localhost:5000/api/vehicles/${id}`,
+        vehicle,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      alert("Vehicle Updated Successfully");
+
+      navigate("/vehicles");
+
     } catch (error) {
-      toast.error("Update Failed");
+
+      console.log(error);
+
+      alert("Update Failed");
+
     }
   };
 
   return (
-    <div className="container mt-5 col-md-6">
-      <h2 className="fw-bold text-center">Edit Vehicle</h2>
 
-      <form className="card shadow p-4 mt-4" onSubmit={updateVehicle}>
-        <input
-          type="text"
-          className="form-control mb-3"
-          placeholder="Vehicle Name"
-          name="name"
-          value={vehicle.name || ""}
-          onChange={handleChange}
-        />
+    <div className="container mt-5">
 
-        <input
-          type="text"
-          className="form-control mb-3"
-          placeholder="Brand"
-          name="brand"
-          value={vehicle.brand || ""}
-          onChange={handleChange}
-        />
+      <div className="card shadow p-4">
 
-        <input
-          type="text"
-          className="form-control mb-3"
-          placeholder="Type"
-          name="type"
-          value={vehicle.type || ""}
-          onChange={handleChange}
-        />
+        <h2 className="mb-4">
+          Edit Vehicle
+        </h2>
 
-        <input
-          type="text"
-          className="form-control mb-3"
-          placeholder="Fuel Type"
-          name="fuelType"
-          value={vehicle.fuelType || ""}
-          onChange={handleChange}
-        />
+        <form onSubmit={handleSubmit}>
 
-        <input
-          type="number"
-          className="form-control mb-3"
-          placeholder="Rent Per Day"
-          name="rentPerDay"
-          value={vehicle.rentPerDay || ""}
-          onChange={handleChange}
-        />
+          <input
+            type="text"
+            name="name"
+            placeholder="Vehicle Name"
+            className="form-control mb-3"
+            value={vehicle.name}
+            onChange={handleChange}
+          />
 
-        <input
-          type="text"
-          className="form-control mb-3"
-          placeholder="Image URL"
-          name="image"
-          value={vehicle.image || ""}
-          onChange={handleChange}
-        />
+          <input
+            type="text"
+            name="brand"
+            placeholder="Brand"
+            className="form-control mb-3"
+            value={vehicle.brand}
+            onChange={handleChange}
+          />
 
-        <button className="btn btn-primary w-100">Update Vehicle</button>
-      </form>
+          <input
+            type="text"
+            name="model"
+            placeholder="Model"
+            className="form-control mb-3"
+            value={vehicle.model}
+            onChange={handleChange}
+          />
+
+          <input
+            type="text"
+            name="vehicleNumber"
+            placeholder="Vehicle Number"
+            className="form-control mb-3"
+            value={vehicle.vehicleNumber}
+            onChange={handleChange}
+          />
+
+          <input
+            type="text"
+            name="type"
+            placeholder="Type"
+            className="form-control mb-3"
+            value={vehicle.type}
+            onChange={handleChange}
+          />
+
+          <input
+            type="number"
+            name="seats"
+            placeholder="Seats"
+            className="form-control mb-3"
+            value={vehicle.seats}
+            onChange={handleChange}
+          />
+
+          <input
+            type="number"
+            name="pricePerDay"
+            placeholder="Price Per Day"
+            className="form-control mb-3"
+            value={vehicle.pricePerDay}
+            onChange={handleChange}
+          />
+
+          <button className="btn btn-primary w-100">
+            Update Vehicle
+          </button>
+
+        </form>
+
+      </div>
+
     </div>
   );
 }

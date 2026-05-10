@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import API from "../api";
 import { toast } from "react-toastify";
 
 function AddRating({ vehicleId }) {
@@ -24,7 +24,7 @@ function AddRating({ vehicleId }) {
 
     try {
 
-      await axios.post(
+      await API.post(
         "http://localhost:5000/api/ratings/add",   // ✅ correct route
         {
           vehicleId: vehicleId,

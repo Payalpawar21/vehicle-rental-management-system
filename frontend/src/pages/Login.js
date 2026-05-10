@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import API from "../api";
 import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -18,7 +18,7 @@ function Login() {
 
       console.log("Sending:", cleanEmail, cleanPassword);
 
-      const res = await axios.post(
+      const res = await API.post(
         "http://localhost:5000/api/auth/login",
         {
           email: cleanEmail,

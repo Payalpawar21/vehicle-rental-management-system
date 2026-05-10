@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import API from "../api";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -16,7 +16,7 @@ function RegistrationForm() {
     e.preventDefault();
 
     try {
-      const { data } = await axios.post(
+      const { data } = await API.post(
         "http://localhost:5000/api/users/register",
         {
           name,

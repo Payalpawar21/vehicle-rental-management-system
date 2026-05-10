@@ -17,7 +17,10 @@ connectDB();
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: "https://vehicle-rental-management-system-five.vercel.app/",
+  credentials: true
+}));
 app.use(express.json());
 
 // Routes

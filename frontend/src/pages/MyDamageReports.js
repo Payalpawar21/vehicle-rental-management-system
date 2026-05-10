@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import API from "../api";
 
 function MyDamageReports() {
 
@@ -11,7 +11,7 @@ function MyDamageReports() {
       // ✅ token localStorage मधून घ्या
       const token = localStorage.getItem("token");
 
-      const res = await axios.get(
+      const res = await API.get(
         "http://localhost:5000/api/damage/my",
         {
           headers: {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import API from "../api";
 
 function AdminDamageReports() {
 
@@ -16,7 +16,7 @@ function AdminDamageReports() {
 
     try {
 
-      const { data } = await axios.get(
+      const { data } = await API.get(
         "http://localhost:5000/api/damage/all",
         {
           headers: {
@@ -36,7 +36,7 @@ function AdminDamageReports() {
 
     try {
 
-      await axios.put(
+      await API.put(
         `http://localhost:5000/api/damage/approve/${id}`,
         {},
         {

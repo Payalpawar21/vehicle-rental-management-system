@@ -40,6 +40,43 @@ router.put("/:id", protect, admin, updateVehicle);
 // Delete vehicle
 router.delete("/:id", protect, admin, deleteVehicle);
 
+router.delete("/:id", async (req, res) => {
+  try {
+
+    const vehicle = await Vehicle.findById(req.params.id);
+
+    if (!vehicle) {
+      return res.status(404).json({ message: "Vehicle not found" });
+    }
+
+    await vehicle.deleteOne();
+
+    res.json({ message: "Vehicle deleted successfully" });
+
+  } catch (error) {
+
+    console.log(error);
+    res.status(500).json({ message: "Server Error" });
+
+  }
+});
+
+router.get("/:id", async (req, res) => {
+
+  try {
+
+    const vehicle = await Vehicle.findById(req.params.id);
+
+    res.json(vehicle);
+
+  } catch (error) {
+
+    console.log(error);
+    res.status(500).json({ message: "Server Error" });
+
+  }
+});
+
 
 // ============================
 // GPS Vehicle Tracking API
