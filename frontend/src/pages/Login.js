@@ -19,7 +19,7 @@ function Login() {
       console.log("Sending:", cleanEmail, cleanPassword);
 
       const res = await API.post(
-        "http://localhost:5000/api/auth/login",
+        "api/auth/login",
         {
           email: cleanEmail,
           password: cleanPassword,
