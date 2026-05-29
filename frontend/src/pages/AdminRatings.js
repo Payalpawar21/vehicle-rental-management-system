@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import API from "../api";
+import axios from "axios";
 import SearchBar from "../component/SearchBar";
 
 function AdminRatings() {
@@ -17,7 +17,7 @@ function AdminRatings() {
 
     try {
 
-      const res = await API.get(
+      const res = await axios.get(
         "http://localhost:5000/api/ratings/all",
         {
           headers: {

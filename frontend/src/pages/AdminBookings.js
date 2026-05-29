@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import API from "../api";
+import axios from "axios";
 
 function AdminBookings() {
 
@@ -17,7 +17,7 @@ function AdminBookings() {
 
       const user = JSON.parse(localStorage.getItem("user"));
 
-      const { data } = await API.get(
+      const { data } = await axios.get(
         "http://localhost:5000/api/admin/bookings",
         {
           headers: {
@@ -41,7 +41,7 @@ function AdminBookings() {
 
       const user = JSON.parse(localStorage.getItem("user"));
 
-      await API.put(
+      await axios.put(
         `http://localhost:5000/api/admin/bookings/${id}`,
         { status: newStatus },
         {

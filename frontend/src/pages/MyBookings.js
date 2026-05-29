@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import API from "../api";
+import axios from "axios";
 import VehicleMap from "../component/VehicleMap";
 
 
@@ -30,7 +30,7 @@ const fetchBookings = async () => {
 
 try {
 
-  const { data } = await API.get(
+  const { data } = await axios.get(
     "http://localhost:5000/api/bookings/my-bookings",
     {
       headers: {
@@ -67,7 +67,7 @@ const updateLocation = (vehicleId) => {
       console.log("📍 LNG:", lng);
 
       try {
-        const res = await API.post(
+        const res = await axios.post(
           "http://localhost:5000/api/vehicles/vehicle/location",
           { vehicleId, lat, lng }
         );
@@ -92,7 +92,7 @@ const handlePayment = async (booking) => {
 
 try {
 
-  const { data } = await API.post(
+  const { data } = await axios.post(
     "http://localhost:5000/api/payments/create-order",
     { amount: booking.totalAmount },
     {
@@ -120,7 +120,7 @@ try {
 
       //VERIFY PAYMENT
 
-      await API.post(
+      await axios.post(
         "http://localhost:5000/api/payments/verify",
         {
           bookingId: booking._id,
@@ -172,7 +172,7 @@ const submitRating = async (booking) => {
 
 try{
 
-await API.post(
+await axios.post(
 "http://localhost:5000/api/ratings/add",
 {
 vehicleId: booking.vehicle._id,
@@ -220,7 +220,7 @@ if (!window.confirm("Are you sure you want to cancel this booking?")) {
 
 try {
 
-  await API.delete(
+  await axios.delete(
     `http://localhost:5000/api/bookings/${id}`,
     {
       headers: {
@@ -260,7 +260,7 @@ const requestRefund = async (bookingId) => {
 
   try {
 
-    await API.post(
+    await axios.post(
       `http://localhost:5000/api/payments/refund-request/${bookingId}`,
       {},
       {

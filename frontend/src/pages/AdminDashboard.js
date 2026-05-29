@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import API from "../api";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const AdminDashboard = () => {
@@ -18,7 +18,7 @@ useEffect(() => {
       const user = JSON.parse(localStorage.getItem("user"));
       const token = user?.token;
 
-      const { data } = await API.get(
+      const { data } = await axios.get(
         "http://localhost:5000/api/admin/stats",
         {
           headers: { Authorization: `Bearer ${token}` },

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import API from "../api";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./Vehicles.css";
 
@@ -23,7 +23,7 @@ function Vehicles() {
 
   const fetchVehicles = async () => {
     try {
-      const { data } = await API.get("http://localhost:5000/api/vehicles");
+      const { data } = await axios.get("http://localhost:5000/api/vehicles");
       setVehicles(data);
       setLoading(false);
     } catch (error) {
@@ -253,7 +253,7 @@ onClick={() => toggleMore(vehicle._id)}
 
             const token = localStorage.getItem("token");
 
-await API.delete(
+await axios.delete(
   `http://localhost:5000/api/vehicles/${vehicle._id}`,
   {
     headers: {

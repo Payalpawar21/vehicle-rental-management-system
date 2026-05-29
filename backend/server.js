@@ -17,10 +17,7 @@ connectDB();
 
 const app = express();
 
-app.use(cors({
-  origin: "https://vehicle-rental-management-system-five.vercel.app",
-  credentials: true
-}));
+app.use(cors());
 app.use(express.json());
 
 // Routes
@@ -44,5 +41,7 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () =>
   console.log(`Server Running on Port ${PORT}`)
 );
+
+
 
 

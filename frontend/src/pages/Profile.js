@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import API from "../api";
+import axios from "axios";
 import { getToken, getUser, saveUser } from "../utils/auth";
 import { toast } from "react-toastify";
 
@@ -29,7 +29,7 @@ function Profile() {
     e.preventDefault();
 
     try {
-      const res = await API.put(
+      const res = await axios.put(
         "http://localhost:5000/api/users/profile",
         form,
         {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import API from "../api";
+import axios from "axios";
 
 function ReportDamage() {
 
@@ -12,7 +12,7 @@ function ReportDamage() {
   // Fetch vehicles
   const fetchVehicles = async () => {
     try {
-      const res = await API.get("http://localhost:5000/api/vehicles");
+      const res = await axios.get("http://localhost:5000/api/vehicles");
       setVehicles(res.data);
     } catch (error) {
       console.log(error);
@@ -34,7 +34,7 @@ function ReportDamage() {
 
     const token = localStorage.getItem("token");
 
-await API.post(
+await axios.post(
   "http://localhost:5000/api/damage/report",
   formData,
   {
@@ -47,7 +47,7 @@ await API.post(
 
     try {
 
-      await API.post(
+      await axios.post(
   "http://localhost:5000/api/damage/report",
   formData,
   {

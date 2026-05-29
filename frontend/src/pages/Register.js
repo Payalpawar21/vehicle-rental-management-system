@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import API from "../api";
+import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -19,7 +19,7 @@ function Register() {
       const cleanEmail = email.trim().toLowerCase();
       const cleanPassword = password.trim();
 
-      const res = await API.post(
+      const res = await axios.post(
         "http://localhost:5000/api/auth/register",
         {
           name,

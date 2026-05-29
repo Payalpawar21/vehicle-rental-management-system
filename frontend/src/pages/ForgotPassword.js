@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import API from "../api";
+import axios from "axios";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
@@ -10,7 +10,7 @@ function ForgotPassword() {
     e.preventDefault();
 
     try {
-      const res = await API.post(
+      const res = await axios.post(
         "http://localhost:5000/api/auth/forgot-password",
         { email }
       );

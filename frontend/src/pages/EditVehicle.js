@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import API from "../api";
+import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
 function EditVehicle() {
@@ -28,7 +28,7 @@ function EditVehicle() {
 
       const token = localStorage.getItem("token");
 
-      const { data } = await API.get(
+      const { data } = await axios.get(
         `http://localhost:5000/api/vehicles/${id}`,
         {
           headers: {
@@ -65,7 +65,7 @@ function EditVehicle() {
 
       const token = localStorage.getItem("token");
 
-      await API.put(
+      await axios.put(
         `http://localhost:5000/api/vehicles/${id}`,
         vehicle,
         {

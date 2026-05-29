@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import API from "../api";
+import axios from "axios";
 import { useParams } from "react-router-dom";
 
 function ResetPassword() {
@@ -10,7 +10,7 @@ function ResetPassword() {
     e.preventDefault();
 
     try {
-      await API.post(
+      await axios.post(
         `http://localhost:5000/api/auth/reset-password/${token}`,
         { password }
       );

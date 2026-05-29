@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import API from "../api";
+import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import "./AdminVehicles.css";
 
@@ -16,7 +16,7 @@ function AdminVehicles() {
   const fetchVehicles = async () => {
     try {
 
-      const { data } = await API.get(
+      const { data } = await axios.get(
         "http://localhost:5000/api/vehicles"
       );
 
@@ -35,7 +35,7 @@ function AdminVehicles() {
 
       const user = JSON.parse(localStorage.getItem("user"));
 
-      await API.delete(
+      await axios.delete(
         `http://localhost:5000/api/admin/vehicles/${id}`,
         {
           headers: {
