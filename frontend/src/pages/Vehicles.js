@@ -24,6 +24,7 @@ function Vehicles() {
   const fetchVehicles = async () => {
     try {
       const { data } = await axios.get("https://vehicle-rental-management-system-1-k1m6.onrender.com/api/vehicles");
+      console.log("VEHICLES DATA =", data);
       setVehicles(data);
       setLoading(false);
     } catch (error) {
@@ -154,9 +155,7 @@ setShowMore((prev) => ({
               <div className="card vehicle-card shadow border-0">
 
                 <div className="position-relative">
-                  console.log(vehicle);
-console.log(vehicle.image);
-
+                 
                   <img
                     src={`https://vehicle-rental-management-system-1-k1m6.onrender.com/images/${vehicle.image}`}
                     alt={vehicle.name}
