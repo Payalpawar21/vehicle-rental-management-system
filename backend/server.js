@@ -20,8 +20,8 @@ const app = express();
 // ✅ CORS FIX (IMPORTANT FOR VERCEL + RENDER)
 app.use(cors({
   origin: [
-   "https://vehicle-rental-management-system-hgqkhyvxn.vercel.app",
-    "https://vehicle-rental-management-system-flame.vercel.app",
+    "https://vehicle-rental-management-system-hgqkhyvxn.vercel.app",
+    "https://vehicle-rental-management-system-e95jrily0.vercel.app",
     "http://localhost:3000"
   ],
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
