@@ -38,7 +38,7 @@ function Login() {
 
       toast.success("Login Successful 🎉");
 
-      if (res.data.user.role === "admin") {
+      if (res.data.user.isAdmin) {
         navigate("/admin/dashboard");
       } else {
         navigate("/");
