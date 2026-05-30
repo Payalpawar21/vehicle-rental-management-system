@@ -156,9 +156,9 @@ setShowMore((prev) => ({
 
                 <div className="position-relative">
                  
-                 <img
+                <img
   src={
-    vehicle.image
+    vehicle.image && vehicle.image !== "undefined"
       ? `https://vehicle-rental-management-system-1-k1m6.onrender.com/images/${vehicle.image}`
       : "https://via.placeholder.com/400x220?text=No+Image"
   }
