@@ -18,14 +18,17 @@ const app = express();
 
 
 // ✅ CORS FIX (IMPORTANT FOR VERCEL + RENDER)
-const corsOptions = {
-  origin: "https://vehicle-rental-management-system-flame.vercel.app",
+app.use(cors({
+  origin: [
+    "https://vehicle-rental-management-system-hgqkhyvxn.vercel.app",
+    "http://localhost:3000"
+  ],
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   credentials: true,
   allowedHeaders: ["Content-Type", "Authorization"]
-};
+}));
 
-app.use(cors(corsOptions));
+app.options("*", cors());
 
 // ✅ FIX: wildcard regex instead of "*"
 app.options(/.*/, cors(corsOptions));
