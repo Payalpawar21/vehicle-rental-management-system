@@ -29,7 +29,7 @@ function EditVehicle() {
       const token = localStorage.getItem("token");
 
       const { data } = await axios.get(
-        `http://localhost:5000/api/vehicles/${id}`,
+        `https://vehicle-rental-management-system-1-k1m6.onrender.com/api/vehicles/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -66,7 +66,7 @@ function EditVehicle() {
       const token = localStorage.getItem("token");
 
       await axios.put(
-        `http://localhost:5000/api/vehicles/${id}`,
+        `https://vehicle-rental-management-system-1-k1m6.onrender.com/api/vehicles/${id}`,
         vehicle,
         {
           headers: {

@@ -18,7 +18,7 @@ function AdminUsers() {
       const user = JSON.parse(localStorage.getItem("user"));
 
       const { data } = await axios.get(
-        "http://localhost:5000/api/admin/users",
+        "https://vehicle-rental-management-system-1-k1m6.onrender.com/api/admin/users",
         {
           headers: {
             Authorization: `Bearer ${user.token}`,

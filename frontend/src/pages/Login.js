@@ -19,7 +19,7 @@ function Login() {
       console.log("Sending:", cleanEmail, cleanPassword);
 
       const res = await axios.post(
-        "http://localhost:5000/api/auth/login",
+        "https://vehicle-rental-management-system-1-k1m6.onrender.com/api/auth/login",
         {
           email: cleanEmail,
           password: cleanPassword,

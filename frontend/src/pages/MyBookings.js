@@ -31,7 +31,7 @@ const fetchBookings = async () => {
 try {
 
   const { data } = await axios.get(
-    "http://localhost:5000/api/bookings/my-bookings",
+    "https://vehicle-rental-management-system-1-k1m6.onrender.com/api/bookings/my-bookings",
     {
       headers: {
         Authorization: `Bearer ${user.token}`,
@@ -68,7 +68,7 @@ const updateLocation = (vehicleId) => {
 
       try {
         const res = await axios.post(
-          "http://localhost:5000/api/vehicles/vehicle/location",
+          "https://vehicle-rental-management-system-1-k1m6.onrender.com/api/vehicles/vehicle/location",
           { vehicleId, lat, lng }
         );
 
@@ -93,7 +93,7 @@ const handlePayment = async (booking) => {
 try {
 
   const { data } = await axios.post(
-    "http://localhost:5000/api/payments/create-order",
+    "https://vehicle-rental-management-system-1-k1m6.onrender.com/api/payments/create-order",
     { amount: booking.totalAmount },
     {
       headers: {
@@ -121,7 +121,7 @@ try {
       //VERIFY PAYMENT
 
       await axios.post(
-        "http://localhost:5000/api/payments/verify",
+        "https://vehicle-rental-management-system-1-k1m6.onrender.com/api/payments/verify",
         {
           bookingId: booking._id,
           razorpayPaymentId: response.razorpay_payment_id
@@ -173,7 +173,7 @@ const submitRating = async (booking) => {
 try{
 
 await axios.post(
-"http://localhost:5000/api/ratings/add",
+"https://vehicle-rental-management-system-1-k1m6.onrender.com/api/ratings/add",
 {
 vehicleId: booking.vehicle._id,
 rating: rating,
@@ -221,7 +221,7 @@ if (!window.confirm("Are you sure you want to cancel this booking?")) {
 try {
 
   await axios.delete(
-    `http://localhost:5000/api/bookings/${id}`,
+    `https://vehicle-rental-management-system-1-k1m6.onrender.com/api/bookings/${id}`,
     {
       headers: {
         Authorization: `Bearer ${user.token}`,
@@ -261,7 +261,7 @@ const requestRefund = async (bookingId) => {
   try {
 
     await axios.post(
-      `http://localhost:5000/api/payments/refund-request/${bookingId}`,
+      `https://vehicle-rental-management-system-1-k1m6.onrender.com/api/payments/refund-request/${bookingId}`,
       {},
       {
         headers: {

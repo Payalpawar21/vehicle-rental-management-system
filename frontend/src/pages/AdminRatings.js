@@ -18,7 +18,7 @@ function AdminRatings() {
     try {
 
       const res = await axios.get(
-        "http://localhost:5000/api/ratings/all",
+        "https://vehicle-rental-management-system-1-k1m6.onrender.com/api/ratings/all",
         {
           headers: {
             Authorization: `Bearer ${user?.token}`

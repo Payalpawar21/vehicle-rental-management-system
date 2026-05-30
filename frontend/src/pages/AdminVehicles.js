@@ -17,7 +17,7 @@ function AdminVehicles() {
     try {
 
       const { data } = await axios.get(
-        "http://localhost:5000/api/vehicles"
+        "https://vehicle-rental-management-system-1-k1m6.onrender.com/api/vehicles"
       );
 
       setVehicles(data);
@@ -36,7 +36,7 @@ function AdminVehicles() {
       const user = JSON.parse(localStorage.getItem("user"));
 
       await axios.delete(
-        `http://localhost:5000/api/admin/vehicles/${id}`,
+        `https://vehicle-rental-management-system-1-k1m6.onrender.com/api/admin/vehicles/${id}`,
         {
           headers: {
             Authorization: `Bearer ${user.token}`,
@@ -97,7 +97,7 @@ function AdminVehicles() {
 
               {/* Vehicle Image */}
               <img
-                src={`http://localhost:5000/images/${vehicle.image}`}
+                src={`https://vehicle-rental-management-system-1-k1m6.onrender.com/images/${vehicle.image}`}
                 alt={vehicle.name}
                 className="card-img-top vehicle-img"
               />

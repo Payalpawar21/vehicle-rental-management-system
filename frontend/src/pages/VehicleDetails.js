@@ -30,7 +30,7 @@ try {
 
 
   const { data } = await axios.get(
-    `http://localhost:5000/api/vehicles/${id}`
+    `https://vehicle-rental-management-system-1-k1m6.onrender.com/api/vehicles/${id}`
   );
 
   setVehicle(data);
@@ -86,7 +86,7 @@ if (!startDate || !endDate) {
 try {
 
   await axios.post(
-    "http://localhost:5000/api/bookings",
+    "https://vehicle-rental-management-system-1-k1m6.onrender.com/api/bookings",
     {
       vehicle: vehicle._id,
       fromDate: startDate,
@@ -134,7 +134,7 @@ if (!rating) {
 try {
 
   await axios.post(
-    "http://localhost:5000/api/ratings/add",
+    "https://vehicle-rental-management-system-1-k1m6.onrender.com/api/ratings/add",
     {
       vehicleId: vehicle._id,
       rating: rating,

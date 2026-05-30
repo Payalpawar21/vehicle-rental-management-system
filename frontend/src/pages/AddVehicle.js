@@ -48,7 +48,7 @@ function AddVehicle() {
       formData.append("image", image);
 
       await axios.post(
-        "http://localhost:5000/api/vehicles",
+        "https://vehicle-rental-management-system-1-k1m6.onrender.com/api/vehicles",
         formData,
         {
           headers: {

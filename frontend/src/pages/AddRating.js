@@ -25,7 +25,7 @@ function AddRating({ vehicleId }) {
     try {
 
       await axios.post(
-        "http://localhost:5000/api/ratings/add",   // ✅ correct route
+        "https://vehicle-rental-management-system-1-k1m6.onrender.com/api/ratings/add",   // ✅ correct route
         {
           vehicleId: vehicleId,
           rating: Number(rating),

@@ -18,7 +18,7 @@ try {
   const user = JSON.parse(localStorage.getItem("user"));
 
   const { data } = await axios.get(
-    "http://localhost:5000/api/admin/payments",
+    "https://vehicle-rental-management-system-1-k1m6.onrender.com/api/admin/payments",
     {
       headers: {
         Authorization: `Bearer ${user.token}`,
@@ -48,7 +48,7 @@ try {
   const user = JSON.parse(localStorage.getItem("user"));
 
   await axios.post(
-    `http://localhost:5000/api/payments/refund/${bookingId}`,
+    `https://vehicle-rental-management-system-1-k1m6.onrender.com/api/payments/refund/${bookingId}`,
     {},
     {
       headers: {

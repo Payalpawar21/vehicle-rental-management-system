@@ -11,7 +11,7 @@ function ResetPassword() {
 
     try {
       await axios.post(
-        `http://localhost:5000/api/auth/reset-password/${token}`,
+        `https://vehicle-rental-management-system-1-k1m6.onrender.com/api/auth/reset-password/${token}`,
         { password }
       );
 

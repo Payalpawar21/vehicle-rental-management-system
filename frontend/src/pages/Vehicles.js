@@ -23,7 +23,7 @@ function Vehicles() {
 
   const fetchVehicles = async () => {
     try {
-      const { data } = await axios.get("http://localhost:5000/api/vehicles");
+      const { data } = await axios.get("https://vehicle-rental-management-system-1-k1m6.onrender.com/api/vehicles");
       setVehicles(data);
       setLoading(false);
     } catch (error) {

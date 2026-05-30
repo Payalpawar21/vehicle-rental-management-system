@@ -16,8 +16,8 @@ function AdminRefundRequests() {
 
     try {
 
-      const { data } = await axios.get(
-        "http://localhost:5000/api/payments/refund-requests",
+      const { data } = await API.get(
+        "https://vehicle-rental-management-system-1-k1m6.onrender.com/api/payments/refund-requests",
         {
           headers: {
             Authorization: `Bearer ${admin.token}`
@@ -44,7 +44,7 @@ function AdminRefundRequests() {
     try {
 
       await axios.post(
-        `http://localhost:5000/api/payments/refund/${bookingId}`,
+        `https://vehicle-rental-management-system-1-k1m6.onrender.com/api/payments/refund/${bookingId}`,
         {},
         {
           headers: {

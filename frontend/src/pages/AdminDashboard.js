@@ -19,7 +19,7 @@ useEffect(() => {
       const token = user?.token;
 
       const { data } = await axios.get(
-        "http://localhost:5000/api/admin/stats",
+        "https://vehicle-rental-management-system-1-k1m6.onrender.com/api/admin/stats",
         {
           headers: { Authorization: `Bearer ${token}` },
         }

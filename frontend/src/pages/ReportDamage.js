@@ -35,7 +35,7 @@ function ReportDamage() {
     const token = localStorage.getItem("token");
 
 await axios.post(
-  "http://localhost:5000/api/damage/report",
+  "https://vehicle-rental-management-system-1-k1m6.onrender.com/api/damage/report",
   formData,
   {
     headers: {
@@ -48,7 +48,7 @@ await axios.post(
     try {
 
       await axios.post(
-  "http://localhost:5000/api/damage/report",
+  "https://vehicle-rental-management-system-1-k1m6.onrender.com/api/damage/report",
   formData,
   {
     headers: {

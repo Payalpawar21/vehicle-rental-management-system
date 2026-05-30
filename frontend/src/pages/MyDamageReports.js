@@ -12,7 +12,7 @@ function MyDamageReports() {
       const token = localStorage.getItem("token");
 
       const res = await axios.get(
-        "http://localhost:5000/api/damage/my",
+        "https://vehicle-rental-management-system-1-k1m6.onrender.com/api/damage/my",
         {
           headers: {
             Authorization: `Bearer ${token}`

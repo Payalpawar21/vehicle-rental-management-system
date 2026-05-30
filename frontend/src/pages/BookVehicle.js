@@ -43,7 +43,7 @@ function BookVehicle() {
     try {
 
       const res = await axios.get(
-        `http://localhost:5000/api/vehicles/${id}`
+        `https://vehicle-rental-management-system-1-k1m6.onrender.com/api/vehicles/${id}`
       );
 
       setVehicle(res.data);
@@ -61,7 +61,7 @@ function BookVehicle() {
     try {
 
       const res = await axios.get(
-        `http://localhost:5000/api/bookings/booked-dates/${id}`
+        `https://vehicle-rental-management-system-1-k1m6.onrender.com/api/bookings/booked-dates/${id}`
       );
 
       setBookedRanges(res.data);
@@ -96,7 +96,7 @@ function BookVehicle() {
     try {
 
       await axios.post(
-        "http://localhost:5000/api/bookings/create",
+        "https://vehicle-rental-management-system-1-k1m6.onrender.com/api/bookings/create",
         {
           vehicle: id,
           fromDate: fromDate.toISOString().split("T")[0],
@@ -132,7 +132,7 @@ function BookVehicle() {
     try {
 
       const { data } = await axios.post(
-        "http://localhost:5000/api/payments/create-order",
+        "https://vehicle-rental-management-system-1-k1m6.onrender.com/api/payments/create-order",
         { amount: totalAmount },
         {
           headers: {
@@ -225,7 +225,7 @@ function BookVehicle() {
           <div className="col-md-6">
 
             <img
-              src={`http://localhost:5000/images/${vehicle.image}`}
+              src={`https://vehicle-rental-management-system-1-k1m6.onrender.com/images/${vehicle.image}`}
               alt={vehicle.name}
               style={{
                 width: "100%",

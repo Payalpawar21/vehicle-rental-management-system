@@ -30,7 +30,7 @@ function Profile() {
 
     try {
       const res = await axios.put(
-        "http://localhost:5000/api/users/profile",
+        "https://vehicle-rental-management-system-1-k1m6.onrender.com/api/users/profile",
         form,
         {
           headers: {

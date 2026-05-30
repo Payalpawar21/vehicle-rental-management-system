@@ -18,7 +18,7 @@ function AdminDamageReports() {
     try {
 
       const { data } = await axios.get(
-        "http://localhost:5000/api/damage/all",
+        "https://vehicle-rental-management-system-1-k1m6.onrender.com/api/damage/all",
         {
           headers: {
             Authorization: `Bearer ${user.token}`
@@ -38,7 +38,7 @@ function AdminDamageReports() {
     try {
 
       await axios.put(
-        `http://localhost:5000/api/damage/approve/${id}`,
+        `https://vehicle-rental-management-system-1-k1m6.onrender.com/api/damage/approve/${id}`,
         {},
         {
           headers: {
