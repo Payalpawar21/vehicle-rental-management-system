@@ -146,12 +146,16 @@ setShowMore((prev) => ({
         ) : (
 
           filteredVehicles.map((vehicle) => (
+            
+
 
             <div className="col-md-4 mb-4" key={vehicle._id}>
 
               <div className="card vehicle-card shadow border-0">
 
                 <div className="position-relative">
+                  console.log(vehicle);
+console.log(vehicle.image);
 
                   <img
                     src={`https://vehicle-rental-management-system-1-k1m6.onrender.com/images/${vehicle.image}`}
