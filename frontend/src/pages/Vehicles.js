@@ -157,11 +157,15 @@ setShowMore((prev) => ({
                 <div className="position-relative">
                  
                   <img
-                    src={`https://vehicle-rental-management-system-1-k1m6.onrender.com/images/${vehicle.image}`}
-                    alt={vehicle.name}
-                    className="card-img-top"
-                    style={{ height: "220px", objectFit: "cover" }}
-                  />
+  src={
+    vehicle.image
+      ? `https://vehicle-rental-management-system-1-k1m6.onrender.com/images/${vehicle.image}`
+      : "/no-image.png"
+  }
+  alt={vehicle.name}
+  className="card-img-top"
+  style={{ height: "220px", objectFit: "cover" }}
+/>
 
                   <span className="badge bg-dark position-absolute top-0 end-0 m-2">
                     ₹{vehicle.pricePerDay}/day
