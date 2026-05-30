@@ -156,11 +156,11 @@ setShowMore((prev) => ({
 
                 <div className="position-relative">
                  
-                  <img
+                 <img
   src={
     vehicle.image
       ? `https://vehicle-rental-management-system-1-k1m6.onrender.com/images/${vehicle.image}`
-      : "/no-image.png"
+      : "https://via.placeholder.com/400x220?text=No+Image"
   }
   alt={vehicle.name}
   className="card-img-top"
