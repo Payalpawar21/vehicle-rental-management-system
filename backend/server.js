@@ -2,7 +2,6 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const connectDB = require("./config/db");
-const path = require("path");
 
 const paymentRoutes = require("./routes/paymentRoutes");
 const invoiceRoutes = require("./routes/invoiceRoutes");
@@ -17,8 +16,22 @@ connectDB();
 
 const app = express();
 
-app.use(cors());
+
+// ✅ CORS FIX (IMPORTANT FOR VERCEL + RENDER)
+const corsOptions = {
+  origin: "https://vehicle-rental-management-system-flame.vercel.app",
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  credentials: true,
+  allowedHeaders: ["Content-Type", "Authorization"]
+};
+
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
+
+
+// middleware
 app.use(express.json());
+
 
 // Routes
 app.use("/api/auth", require("./routes/authRoutes"));
@@ -31,17 +44,22 @@ app.use("/api/invoices", invoiceRoutes);
 app.use("/api/damage", damageRoutes);
 app.use("/api/ratings", ratingRoutes);
 
+
+// static files
 app.use("/images", express.static("public/images"));
 
+
+// test route
 app.get("/", (req, res) => {
   res.send("Vehicle Rental Backend Running Successfully 🚗");
 });
 
+
+// server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () =>
   console.log(`Server Running on Port ${PORT}`)
 );
-
 
 
 
