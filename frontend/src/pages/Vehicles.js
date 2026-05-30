@@ -154,7 +154,7 @@ setShowMore((prev) => ({
                 <div className="position-relative">
 
                   <img
-                    src={`http://https://vehicle-rental-management-system-1-k1m6.onrender.com/images/${vehicle.image}`}
+                    src={`https://vehicle-rental-management-system-1-k1m6.onrender.com/images/${vehicle.image}`}
                     alt={vehicle.name}
                     className="card-img-top"
                     style={{ height: "220px", objectFit: "cover" }}
@@ -254,7 +254,7 @@ onClick={() => toggleMore(vehicle._id)}
             const token = localStorage.getItem("token");
 
 await axios.delete(
-  `http://https://vehicle-rental-management-system-1-k1m6.onrender.com/api/vehicles/${vehicle._id}`,
+  `https://vehicle-rental-management-system-1-k1m6.onrender.com/api/vehicles/${vehicle._id}`,
   {
     headers: {
       Authorization: `Bearer ${token}`,
