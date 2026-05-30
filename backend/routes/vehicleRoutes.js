@@ -2,8 +2,6 @@ const express = require("express");
 const router = express.Router();
 
 const upload = require("../middleware/uploadMiddleware");
-const Vehicle = require("../models/Vehicle");
-
 const { protect, admin } = require("../middleware/authMiddleware");
 
 const { addVehicle } = require("../controllers/adminController");
@@ -15,9 +13,11 @@ const {
   deleteVehicle
 } = require("../controllers/vehicleController");
 
+const Vehicle = require("../models/Vehicle");
+
 
 // ============================
-// Public Routes
+// PUBLIC ROUTES
 // ============================
 
 // Get all vehicles
@@ -28,68 +28,47 @@ router.get("/:id", getVehicleById);
 
 
 // ============================
-// Admin Routes
+// ADMIN ROUTES
 // ============================
 
 // Add vehicle
-router.post("/", protect, admin, upload.single("image"), addVehicle);
+router.post(
+  "/",
+  protect,
+  admin,
+  upload.single("image"),
+  addVehicle
+);
 
 // Update vehicle
-router.put("/:id", protect, admin, updateVehicle);
+router.put(
+  "/:id",
+  protect,
+  admin,
+  updateVehicle
+);
 
 // Delete vehicle
-router.delete("/:id", protect, admin, deleteVehicle);
-
-router.delete("/:id", async (req, res) => {
-  try {
-
-    const vehicle = await Vehicle.findById(req.params.id);
-
-    if (!vehicle) {
-      return res.status(404).json({ message: "Vehicle not found" });
-    }
-
-    await vehicle.deleteOne();
-
-    res.json({ message: "Vehicle deleted successfully" });
-
-  } catch (error) {
-
-    console.log(error);
-    res.status(500).json({ message: "Server Error" });
-
-  }
-});
-
-router.get("/:id", async (req, res) => {
-
-  try {
-
-    const vehicle = await Vehicle.findById(req.params.id);
-
-    res.json(vehicle);
-
-  } catch (error) {
-
-    console.log(error);
-    res.status(500).json({ message: "Server Error" });
-
-  }
-});
+router.delete(
+  "/:id",
+  protect,
+  admin,
+  deleteVehicle
+);
 
 
 // ============================
-// GPS Vehicle Tracking API
+// GPS VEHICLE TRACKING API
 // ============================
 
 router.post("/vehicle/location", async (req, res) => {
   try {
     const { vehicleId, lat, lng } = req.body;
 
-    console.log("🔥 API HIT:", vehicleId, lat, lng);
-
-    if (!vehicleId || !lat || !lng) {
-      return res.status(400).json({ message: "Missing data" });
+    if (!vehicleId || lat === undefined || lng === undefined) {
+      return res.status(400).json({
+        message: "Missing data"
+      });
     }
 
     const vehicle = await Vehicle.findByIdAndUpdate(
@@ -97,21 +76,26 @@ router.post("/vehicle/location", async (req, res) => {
       {
         $set: {
           "location.lat": lat,
-          "location.lng": lng
-        }
+          "location.lng": lng,
+        },
       },
       { new: true }
     );
 
-    console.log("✅ UPDATED VEHICLE:", vehicle);
+    if (!vehicle) {
+      return res.status(404).json({
+        message: "Vehicle not found"
+      });
+    }
 
     res.json(vehicle);
 
   } catch (error) {
-    console.log("❌ ERROR:", error);
-    res.status(500).json({ message: "Error updating location" });
+    console.log(error);
+    res.status(500).json({
+      message: "Error updating location"
+    });
   }
 });
-
 
 module.exports = router;
