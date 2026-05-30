@@ -30,8 +30,7 @@ app.use(cors({
 
 app.options("*", cors());
 
-// ✅ FIX: wildcard regex instead of "*"
-app.options(/.*/, cors(corsOptions));
+
 
 // middleware
 app.use(express.json());
