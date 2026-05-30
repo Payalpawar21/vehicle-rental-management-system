@@ -12,7 +12,7 @@ function VehicleReviews({ vehicleId }) {
   const fetchReviews = async () => {
 
     const { data } = await axios.get(
-      `http://localhost:5000/api/ratings/vehicle/${vehicleId}`
+      `https://vehicle-rental-management-system-1-k1m6.onrender.com/api/ratings/vehicle/${vehicleId}`
     );
 
     setReviews(data);

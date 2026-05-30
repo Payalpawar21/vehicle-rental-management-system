@@ -122,7 +122,7 @@ exports.forgotPassword = async (req, res) => {
 
     await user.save();
 
-    const resetUrl = `http://localhost:3000/reset-password/${resetToken}`;
+   const resetUrl = `https://vehicle-rental-management-system-e95jrily0.vercel.app/reset-password/${resetToken}`;
 
     const message = `
       <h2>Reset Password</h2>

@@ -14,7 +14,7 @@ function AddRating({ vehicleId }) {
     try {
 
       await axios.post(
-        "http://localhost:5000/api/ratings/add",
+        "https://vehicle-rental-management-system-1-k1m6.onrender.com/api/ratings/add",
         {
           vehicleId,
           rating,
