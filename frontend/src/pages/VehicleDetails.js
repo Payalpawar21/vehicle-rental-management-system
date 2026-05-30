@@ -186,7 +186,7 @@ return (
 <div className="card shadow-lg border-0">
 
 <img
-src={`http://localhost:5000/images/${vehicle.image}`}
+src={`https://vehicle-rental-management-system-1-k1m6.onrender.com/images/${vehicle.image}`}
 alt={vehicle.name}
 className="card-img-top"
 style={{ height:"350px", objectFit:"cover"}}

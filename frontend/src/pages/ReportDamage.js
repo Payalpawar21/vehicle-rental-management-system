@@ -12,7 +12,7 @@ function ReportDamage() {
   // Fetch vehicles
   const fetchVehicles = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/vehicles");
+      const res = await axios.get("https://vehicle-rental-management-system-1-k1m6.onrender.com/api/vehicles");
       setVehicles(res.data);
     } catch (error) {
       console.log(error);
